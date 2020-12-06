@@ -8,7 +8,7 @@ import { NewsServiceService } from 'src/app/news-service.service';
 })
 export class NewsApiComponent implements OnInit {
 
-  name={};
+  name;
   constructor(private news:NewsServiceService) { 
     this.news.getNews().subscribe(datas => {
       this.name=datas;
