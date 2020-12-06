@@ -1,0 +1,516 @@
+<!-- here one problem it can not take dynamic city  -->
+<!-- this is not responsive -->
+
+<div class="card mainCard mb-4">
+    <div class="card-header">
+        <h3 style="display: inline; "><span class="now">Today : </span>
+            <h4 class="date" style="display: inline;">{{ dateObj | date:'MMMM d, y' }}</h4>
+        </h3>
+        <span class="badge badge-secondary p-2" style="float: right;">
+            <h4>{{dateObj | date: 'hh:mm:ss a'}}</h4>
+        </span>
+    </div>
+    <div class="card-body ">
+        <!-- date: {{ dateObj | date:'EEEE, MMMM d, y' }} date: {{ dateObj | date:'a' }}
+        <p>date: {{ dateObj | date:'h s' }}</p> -->
+        <div *ngIf=" (dateObj | date: 'a')=='AM' ; else elseBlock ">
+
+            <div class="text-center " *ngIf=" (dateObj | date: 'h')>= 5; else elseBlock1">
+                <span *ngFor="let items of weatherData.weather">
+                    
+                <div [ngSwitch]="items.main">
+
+                    <!-- clear case-------------------------------------------------------------------- -->
+
+                    <div *ngSwitchCase="'Clear'">
+                        <div class="" style="width: 100%; height: 20vh; background-image: url('https://image.freepik.com/free-photo/clear-blue-sky-panoramic-high-resolution-picture_117930-644.jpg'); background-repeat: no-repeat;background-size: cover;background-position: center;">
+                            <div class="mt-4 ml-5" style="float: left;">
+                                <i class='fas fa-sun sun animate__animated animate__pulse animate__infinite animate__slow' style='font-size:58px;color:rgb(229, 255, 0)'></i>
+                                <p class="ml-2 mt-2">
+                                    <span class="text-light" *ngFor="let item of weatherData.weather">
+                                   <b> {{item.main}}</b><br>
+                                   <small>{{item.description}}</small>
+                                </span>
+                </p>
+            </div>
+            <div class="mt-5 mr-5 " style="float: right; ">
+                <i class='fas fa-street-view street' style='text-shadow: 7px 28px 10px rgb(95, 86, 86); font-size:48px;color:rgb(255, 255, 255);float: left; '></i>
+                <h2 class="text-light city" style="float: left; text-shadow: 7px 8px 10px rgb(95, 86, 86);">{{weatherData.name}}</h2>&nbsp;
+                <h1 class="city" style="float: right; text-shadow: 7px 8px 10px rgb(95, 86, 86); color: rgb(229, 255, 0)">- {{weatherData.sys.country}}</h1>
+
+            </div>
+
+            <h1 class="mt-5 text-light temp" style="font-size: 70px; position: absolute; margin-left: 35%; text-shadow: 7px 8px 10px rgb(95, 86, 86);">{{weatherData.main.temp-273.15 | number}}&deg;<small><b>c</b></small></h1>
+
+        </div>
+    </div>
+
+
+    <!-- rain case------------------------------------------------------------------------------ -->
+
+    <div *ngSwitchCase="'Rain'">
+        <div class="" style="width: 100%; height: 20vh; background-image: url('https://media1.tenor.com/images/735e68b36fb24b5cadda815230daad05/tenor.gif?itemid=13649339'); background-repeat: no-repeat;background-size: cover;background-position: center;">
+            <div class="mt-4 ml-5" style="float: left;">
+                <i class='fas fa-cloud-sun-rain sun animate__animated animate__pulse animate__infinite animate__slow' style='font-size:58px;color:rgb(229, 255, 0)'></i>
+                <p class="ml-2 mt-2">
+                    <span class="text-light" *ngFor=" let item of weatherData.weather ">
+                                   <b> {{item.main}}</b><br>
+                                   <small>{{item.description}}</small>
+                                </span>
+                </p>
+            </div>
+            <div class="mt-5 mr-5 " style="float: right; ">
+                <i class='fas fa-street-view street' style='text-shadow: 7px 28px 10px rgb(95, 86, 86); font-size:48px;color:rgb(255, 255, 255);float: left; '></i>
+                <h2 class="text-light city" style="float: left; text-shadow: 7px 8px 10px rgb(95, 86, 86); ">{{weatherData.name}}</h2>&nbsp;
+                <h1 class="city" style="float: right; text-shadow: 7px 8px 10px rgb(95, 86, 86); color: rgb(229, 255, 0) ">- {{weatherData.sys.country}}</h1>
+
+            </div>
+
+            <h1 class="mt-5 text-light temp" style="font-size: 70px; position: absolute; margin-left: 35%; text-shadow: 7px 8px 10px rgb(95, 86, 86); ">{{weatherData.main.temp-273.15 | number}}&deg;<small><b>c</b></small></h1>
+
+        </div>
+    </div>
+
+    <!-- default case ------------------------------------------------------------ -->
+
+    <div *ngSwitchDefault>
+        <div class=" " style="width: 100%; height: 20vh; background-image: url( 'https://www.fox8live.com/resizer/9ueUhxU19NcQDO5krMFoTOxzN18=/1200x600/arc-anglerfish-arc2-prod-raycom.s3.amazonaws.com/public/525NQWAC3NGO5PGEC3URYV5EK4.jpg'); background-repeat:
+                        no-repeat;background-size: cover;background-position: center; ">
+            <div class="mt-4 ml-5 " style="float: left; ">
+                <i class='fas fa-cloud sun animate__animated animate__pulse animate__infinite animate__slow' style='font-size:58px;color:rgb(255, 255, 255)'></i>
+                <p class="ml-2 mt-2 ">
+                    <span *ngFor="let item of weatherData.weather ">
+                   <b class="text-light "> {{item.main}}</b><br>
+                   <small class="text-light ">{{item.description}}</small>
+                </span>
+                </p>
+            </div>
+            <div class="mt-5 mr-5 " style="float: right; ">
+                <i class='fas fa-street-view street' style='text-shadow: 7px 28px 10px rgb(95, 86, 86); font-size:48px;color:rgb(255, 255, 255);float: left; '></i>
+                <h2 class="text-light city" style="float: left; text-shadow: 7px 8px 10px rgb(95, 86, 86); ">{{weatherData.name}}</h2>&nbsp;
+                <h1 class="city" style="float: right; text-shadow: 7px 8px 10px rgb(95, 86, 86); color: rgb(229, 255, 0) ">- {{weatherData.sys.country}}</h1>
+
+            </div>
+
+            <h1 class="mt-5 text-light temp" style="font-size: 70px; position: absolute; margin-left: 35%; text-shadow: 7px 8px 10px rgb(95, 86, 86); ">{{weatherData.main.temp-273.15 | number}}&deg;<small><b>c</b></small></h1>
+
+        </div>
+    </div>
+    <!-- end default case-------------------------------------------------------------------- -->
+
+</div>
+</span>
+
+
+<!-- all details --------------------------------------------------------- -->
+<div class="row mt-3 ">
+    <div class="col-sm-12 ">
+        <div class="card " style="background-color: rgb(165, 128, 128); ">
+            <div class="card-header text-center">
+                <h3 class="text-light day">{{ dateObj | date:'EEEE' }}&nbsp; <i class='fas fa-smog' style='font-size:48px;color:rgb(255, 255, 255)'></i></h3>
+            </div>
+            <div class=" card-body table-responsive ">
+                <table class="table table-borderless ">
+                    <tr class="text-light ">
+                        <th>visibility</th>
+                        <th>temp_min</th>
+                        <th>temp_max</th>
+                        <th>pressure</th>
+                        <th>humidity</th>
+                        <th>wind-speed</th>
+                        <th>sea_level</th>
+                        <th>grnd_level</th>
+                    </tr>
+                    <tr class="text-light ">
+                        <td>{{weatherData.visibility}} meter</td>
+                        <td>{{weatherData.main.temp_min-273.15 | number}}&deg;c</td>
+                        <td>{{weatherData.main.temp_max-273.15 | number}}&deg;c</td>
+                        <td>{{weatherData.main.pressure}} hPa</td>
+                        <td>{{weatherData.main.humidity}}%</td>
+                        <td>{{weatherData.wind.speed*3.6 | number}} km/h</td>
+                        <td>{{weatherData.main.sea_level}} hPa</td>
+                        <td>{{weatherData.main.grnd_level}} hPa</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End details----------------------------------------------------- -->
+
+</div>
+<ng-template #elseBlock1>
+    <span *ngFor="let items of weatherData.weather ">
+        <!-- items.main  -->
+        <div [ngSwitch]="color ">
+
+            <!-- clear case-------------------------------------------------------------------- -->
+
+            <div *ngSwitchCase=" 'Clear' ">
+                <div class=" " style="width: 100%; height: 20vh; background-image: url(
+                        'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/d3ac3ddb-903e-427e-8991-85b788462020/dbxlypn-97eacb9a-4ac6-4e37-82d6-dc11c078a2ac.jpg/v1/fill/w_1359,h_588,q_70,strp/starry_sky_ps_overlay__13__by_duzulek_dbxlypn-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD02OTMiLCJwYXRoIjoiXC9mXC9kM2FjM2RkYi05MDNlLTQyN2UtODk5MS04NWI3ODg0NjIwMjBcL2RieGx5cG4tOTdlYWNiOWEtNGFjNi00ZTM3LTgyZDYtZGMxMWMwNzhhMmFjLmpwZyIsIndpZHRoIjoiPD0xNjAwIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.QTAcR2GouyUD4oqUW2WN43HWavthIbKo2rLtXm42FH8'); background-repeat: no-repeat;background-size: cover;background-position: center; ">
+                    <div class="mt-4 ml-5 " style="float: left; ">
+                        <i class='fas fa-moon sun animate__animated animate__pulse animate__infinite animate__slow' style='font-size:58px;color:rgb(255, 255, 255)'></i>
+                        <p class="ml-2 mt-2 ">
+                            <span class="text-light " *ngFor="let item of weatherData.weather ">
+                           <b> {{item.main}}</b><br>
+                           <small>{{item.description}}</small>
+                        </span>
+    </p>
+    </div>
+    <div class="mt-5 mr-5 " style="float: right; ">
+        <i class='fas fa-street-view street' style='text-shadow: 7px 28px 10px rgb(95, 86, 86); font-size:48px;color:rgb(255, 255, 255);float: left; '></i>
+        <h2 class="text-light city" style="float: left; text-shadow: 7px 8px 10px rgb(95, 86, 86); ">{{weatherData.name}}</h2>&nbsp;
+        <h1 class="city" style="float: right; text-shadow: 7px 8px 10px rgb(95, 86, 86); color: rgb(229, 255, 0) ">- {{weatherData.sys.country}}</h1>
+
+    </div>
+
+    <h1 class="mt-5 text-light temp" style="font-size: 70px; position: absolute; margin-left: 35%; text-shadow: 7px 8px 10px rgb(95, 86, 86); ">{{weatherData.main.temp-273.15 | number}}&deg;<small><b>c</b></small></h1>
+
+    </div>
+    </div>
+
+
+    <!-- rain case------------------------------------------------------------------------------ -->
+
+    <div *ngSwitchCase=" 'Rain' ">
+        <div class=" " style="width: 100%; height: 20vh; background-image: url( 'https://cdn2.scratch.mit.edu/get_image/gallery/2930793_200x130.png'); background-repeat: no-repeat;background-size: cover;background-position: center; ">
+            <div class="mt-4 ml-5 " style="float: left; ">
+                <i class='fas fa-cloud-moon-rain sun animate__animated animate__pulse animate__infinite animate__slow' style='font-size:58px;color:rgb(255, 255, 255)'></i>
+                <p class="ml-2 mt-2 ">
+                    <span class="text-light " *ngFor="let item of weatherData.weather ">
+                           <b> {{item.main}}</b><br>
+                           <small>{{item.description}}</small>
+                        </span>
+                </p>
+            </div>
+            <div class="mt-5 mr-5 " style="float: right; ">
+                <i class='fas fa-street-view street' style='text-shadow: 7px 28px 10px rgb(95, 86, 86); font-size:48px;color:rgb(255, 255, 255);float: left; '></i>
+                <h2 class="text-light city" style="float: left; text-shadow: 7px 8px 10px rgb(95, 86, 86); ">{{weatherData.name}}</h2>&nbsp;
+                <h1 class="city" style="float: right; text-shadow: 7px 8px 10px rgb(95, 86, 86); color: rgb(229, 255, 0) ">- {{weatherData.sys.country}}</h1>
+
+            </div>
+
+            <h1 class="mt-5 text-light temp" style="font-size: 70px; position: absolute; margin-left: 35%; text-shadow: 7px 8px 10px rgb(95, 86, 86); ">{{weatherData.main.temp-273.15 | number}}&deg;<small><b>c</b></small></h1>
+
+        </div>
+    </div>
+
+    <!-- default case ------------------------------------------------------------ -->
+
+    <div *ngSwitchDefault>
+        <div class=" " style="width: 100%; height: 20vh; background-image: url( 'https://jooinn.com/images/night-scene-54.png'); background-repeat: no-repeat;background-size: cover;background-position: center; ">
+            <div class="mt-4 ml-5 " style="float: left; ">
+                <i class='fas fa-cloud-moon sun animate__animated animate__pulse animate__infinite animate__slow' style='font-size:58px;color:rgb(255, 255, 255)'></i>
+                <p class="ml-2 mt-2 ">
+                    <span *ngFor="let item of weatherData.weather ">
+           <b class="text-light "> {{item.main}}</b><br>
+           <small class="text-light ">{{item.description}}</small>
+        </span>
+                </p>
+            </div>
+            <div class="mt-5 mr-5 " style="float: right; ">
+                <i class='fas fa-street-view street' style='text-shadow: 7px 28px 10px rgb(95, 86, 86); font-size:48px;color:rgb(255, 255, 255);float: left; '></i>
+                <h2 class="text-light city" style="float: left; text-shadow: 7px 8px 10px rgb(95, 86, 86); ">{{weatherData.name}}</h2>&nbsp;
+                <h1 class="city" style="float: right; text-shadow: 7px 8px 10px rgb(95, 86, 86); color: rgb(229, 255, 0) ">- {{weatherData.sys.country}}</h1>
+
+            </div>
+
+            <h1 class="mt-5 text-light temp" style="font-size: 70px; position: absolute; margin-left: 35%; text-shadow: 7px 8px 10px rgb(95, 86, 86); ">{{weatherData.main.temp-273.15 | number}}&deg;<small><b>c</b></small></h1>
+
+        </div>
+    </div>
+    <!-- end default case-------------------------------------------------------------------- -->
+
+    </div>
+    </span>
+    <!-- all details --------------------------------------------------------- -->
+    <div class="row mt-3 ">
+        <div class="col-sm-12 ">
+            <div class="card " style="background-color: rgb(165, 128, 128); ">
+                <div class="card-header text-center">
+                    <h3 class="text-light day">{{ dateObj | date:'EEEE' }}&nbsp; <i class='fas fa-smog' style='font-size:48px;color:rgb(255, 255, 255)'></i></h3>
+                </div>
+                <div class=" card-body table-responsive ">
+                    <table class="table table-borderless ">
+                        <tr class="text-light ">
+                            <th>visibility</th>
+                            <th>temp_min</th>
+                            <th>temp_max</th>
+                            <th>pressure</th>
+                            <th>humidity</th>
+                            <th>wind-speed</th>
+                            <th>sea_level</th>
+                            <th>grnd_level</th>
+                        </tr>
+                        <tr class="text-light ">
+                            <td>{{weatherData.visibility}} meter</td>
+                            <td>{{weatherData.main.temp_min-273.15 | number}}&deg;c</td>
+                            <td>{{weatherData.main.temp_max-273.15 | number}}&deg;c</td>
+                            <td>{{weatherData.main.pressure}} hPa</td>
+                            <td>{{weatherData.main.humidity}}%</td>
+                            <td>{{weatherData.wind.speed*3.6 | number}} km/h</td>
+                            <td>{{weatherData.main.sea_level}} hPa</td>
+                            <td>{{weatherData.main.grnd_level}} hPa</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End details----------------------------------------------------- -->
+</ng-template>
+</div>
+
+<!-- Night--------------------------------------------------------------------------- -->
+
+<ng-template #elseBlock>
+    <div *ngIf=" (dateObj | date: 'h') >=6 ; else elseBlock2 ">
+        <span *ngFor="let items of weatherData.weather ">
+            <!-- items.main  -->
+            <div [ngSwitch]="items.main ">
+
+                <!-- clear case-------------------------------------------------------------------- -->
+
+                <div *ngSwitchCase=" 'Clear' ">
+                    <div class=" " style="width: 100%; height: 20vh; background-image: url(
+                        'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/d3ac3ddb-903e-427e-8991-85b788462020/dbxlypn-97eacb9a-4ac6-4e37-82d6-dc11c078a2ac.jpg/v1/fill/w_1359,h_588,q_70,strp/starry_sky_ps_overlay__13__by_duzulek_dbxlypn-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD02OTMiLCJwYXRoIjoiXC9mXC9kM2FjM2RkYi05MDNlLTQyN2UtODk5MS04NWI3ODg0NjIwMjBcL2RieGx5cG4tOTdlYWNiOWEtNGFjNi00ZTM3LTgyZDYtZGMxMWMwNzhhMmFjLmpwZyIsIndpZHRoIjoiPD0xNjAwIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.QTAcR2GouyUD4oqUW2WN43HWavthIbKo2rLtXm42FH8'); background-repeat: no-repeat;background-size: cover;background-position: center; ">
+                        <div class="mt-4 ml-5 " style="float: left; ">
+                            <i class='fas fa-moon sun animate__animated animate__pulse animate__infinite animate__slow' style='font-size:58px;color:rgb(255, 255, 255)'></i>
+                            <p class="ml-2 mt-2 ">
+                                <span class="text-light " *ngFor="let item of weatherData.weather ">
+                               <b> {{item.main}}</b><br>
+                               <small>{{item.description}}</small>
+                            </span>
+        </p>
+    </div>
+    <div class="mt-5 mr-5 " style="float: right; ">
+        <i class='fas fa-street-view street' style='text-shadow: 7px 28px 10px rgb(95, 86, 86); font-size:48px;color:rgb(255, 255, 255);float: left; '></i>
+        <h2 class="text-light city" style="float: left; text-shadow: 7px 8px 10px rgb(95, 86, 86); ">{{weatherData.name}}</h2>&nbsp;
+        <h1 class="city" style="float: right; text-shadow: 7px 8px 10px rgb(95, 86, 86); color: rgb(229, 255, 0) ">- {{weatherData.sys.country}}</h1>
+
+    </div>
+
+    <h1 class="mt-5 text-light temp" style="font-size: 70px; position: absolute; margin-left: 35%; text-shadow: 7px 8px 10px rgb(95, 86, 86); ">{{weatherData.main.temp-273.15 | number}}&deg;<small><b>c</b></small></h1>
+
+    </div>
+    </div>
+
+
+    <!-- rain case------------------------------------------------------------------------------ -->
+
+    <div *ngSwitchCase=" 'Rain' ">
+        <div class=" " style="width: 100%; height: 20vh; background-image: url( 'https://cdn2.scratch.mit.edu/get_image/gallery/2930793_200x130.png'); background-repeat: no-repeat;background-size: cover;background-position: center; ">
+            <div class="mt-4 ml-5 " style="float: left; ">
+                <i class='fas fa-cloud-moon-rain sun animate__animated animate__pulse animate__infinite animate__slow' style='font-size:58px;color:rgb(255, 255, 255)'></i>
+                <p class="ml-2 mt-2 ">
+                    <span class="text-light " *ngFor="let item of weatherData.weather ">
+                               <b> {{item.main}}</b><br>
+                               <small>{{item.description}}</small>
+                            </span>
+                </p>
+            </div>
+            <div class="mt-5 mr-5 " style="float: right; ">
+                <i class='fas fa-street-view street' style='text-shadow: 7px 28px 10px rgb(95, 86, 86); font-size:48px;color:rgb(255, 255, 255);float: left; '></i>
+                <h2 class="text-light city" style="float: left; text-shadow: 7px 8px 10px rgb(95, 86, 86); ">{{weatherData.name}}</h2>&nbsp;
+                <h1 class="city" style="float: right; text-shadow: 7px 8px 10px rgb(95, 86, 86); color: rgb(229, 255, 0) ">- {{weatherData.sys.country}}</h1>
+
+            </div>
+
+            <h1 class="mt-5 text-light temp" style="font-size: 70px; position: absolute; margin-left: 35%; text-shadow: 7px 8px 10px rgb(95, 86, 86); ">{{weatherData.main.temp-273.15 | number}}&deg;<small><b>c</b></small></h1>
+
+        </div>
+    </div>
+
+    <!-- default case ------------------------------------------------------------ -->
+
+    <div *ngSwitchDefault>
+        <div class=" " style="width: 100%; height: 20vh; background-image: url( 'https://jooinn.com/images/night-scene-54.png'); background-repeat: no-repeat;background-size: cover;background-position: center; ">
+            <div class="mt-4 ml-5 " style="float: left; ">
+                <i class='fas fa-cloud-moon sun animate__animated animate__pulse animate__infinite animate__slow' style='font-size:58px;color:rgb(255, 255, 255)'></i>
+                <p class="ml-2 mt-2 ">
+                    <span *ngFor="let item of weatherData.weather ">
+               <b class="text-light "> {{item.main}}</b><br>
+               <small class="text-light ">{{item.description}}</small>
+            </span>
+                </p>
+            </div>
+            <div class="mt-5 mr-5 " style="float: right; ">
+                <i class='fas fa-street-view street' style='text-shadow: 7px 28px 10px rgb(95, 86, 86); font-size:48px;color:rgb(255, 255, 255);float: left; '></i>
+                <h2 class="text-light city" style="float: left; text-shadow: 7px 8px 10px rgb(95, 86, 86); ">{{weatherData.name}}</h2>&nbsp;
+                <h1 class="city" style="float: right; text-shadow: 7px 8px 10px rgb(95, 86, 86); color: rgb(229, 255, 0) ">- {{weatherData.sys.country}}</h1>
+
+            </div>
+
+            <h1 class="mt-5 text-light temp" style="font-size: 70px; position: absolute; margin-left: 35%; text-shadow: 7px 8px 10px rgb(95, 86, 86); ">{{weatherData.main.temp-273.15 | number}}&deg;<small><b>c</b></small></h1>
+
+        </div>
+    </div>
+    <!-- end default case-------------------------------------------------------------------- -->
+
+    </div>
+    </span>
+
+    <!-- all details --------------------------------------------------------- -->
+    <div class="row mt-3 ">
+        <div class="col-sm-12 ">
+            <div class="card text-center " style="background-color: rgb(165, 128, 128); ">
+                <div class="card-header text-center">
+                    <h3 class="text-light day">{{ dateObj | date:'EEEE' }}&nbsp; <i class='fas fa-smog' style='font-size:48px;color:rgb(255, 255, 255)'></i></h3>
+                </div>
+                <div class=" card-body table-responsive ">
+                    <table class="table table-borderless ">
+                        <tr class="text-light ">
+                            <th>visibility</th>
+                            <th>temp_min</th>
+                            <th>temp_max</th>
+                            <th>pressure</th>
+                            <th>humidity</th>
+                            <th>wind-speed</th>
+                            <th>sea_level</th>
+                            <th>grnd_level</th>
+                        </tr>
+                        <tr class="text-light ">
+                            <td>{{weatherData.visibility}} meter</td>
+                            <td>{{weatherData.main.temp_min-273.15 | number}}&deg;c</td>
+                            <td>{{weatherData.main.temp_max-273.15 | number}}&deg;c</td>
+                            <td>{{weatherData.main.pressure}} hPa</td>
+                            <td>{{weatherData.main.humidity}}%</td>
+                            <td>{{weatherData.wind.speed*3.6 | number}} km/h</td>
+                            <td>{{weatherData.main.sea_level}} hPa</td>
+                            <td>{{weatherData.main.grnd_level}} hPa</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End details----------------------------------------------------- -->
+
+
+    </div>
+    <ng-template #elseBlock2>
+        <span *ngFor="let items of weatherData.weather ">
+                    
+            <div [ngSwitch]="items.main ">
+
+                <!-- clear case-------------------------------------------------------------------- -->
+
+                <div *ngSwitchCase=" 'Clear' ">
+                    <div class=" " style="width: 100%; height: 20vh; background-image: url( 'https://image.freepik.com/free-photo/clear-blue-sky-panoramic-high-resolution-picture_117930-644.jpg'); background-repeat: no-repeat;background-size: cover;background-position:
+                        center; ">
+                        <div class="mt-4 ml-5 " style="float: left; ">
+                            <i class='fas fa-sun sun animate__animated animate__pulse animate__infinite animate__slow' style='font-size:58px;color:rgb(229, 255, 0)'></i>
+                            <p class="ml-2 mt-2 ">
+                                <span class="text-light" *ngFor="let item of weatherData.weather">
+                    <b> {{item.main}}</b><br>
+                    <small>{{item.description}}</small>
+                    </span>
+        </p>
+        </div>
+        <div class="mt-5 mr-5 " style="float: right; ">
+            <i class='fas fa-street-view street' style='text-shadow: 7px 28px 10px rgb(95, 86, 86); font-size:48px;color:rgb(255, 255, 255);float: left; '></i>
+            <h2 class="text-light city" style="float: left; text-shadow: 7px 8px 10px rgb(95, 86, 86);">{{weatherData.name}}</h2>&nbsp;
+            <h1 class="city" style="float: right; text-shadow: 7px 8px 10px rgb(95, 86, 86); color: rgb(229, 255, 0)">- {{weatherData.sys.country}}</h1>
+
+        </div>
+
+        <h1 class="mt-5 text-light temp" style="font-size: 70px; position: absolute; margin-left: 35%; text-shadow: 7px 8px 10px rgb(95, 86, 86);">{{weatherData.main.temp-273.15 | number}}&deg;<small><b>c</b></small></h1>
+
+        </div>
+        </div>
+
+
+        <!-- rain case------------------------------------------------------------------------------ -->
+
+        <div *ngSwitchCase="'Rain'">
+            <div class="" style="width: 100%; height: 20vh; background-image: url('https://media1.tenor.com/images/735e68b36fb24b5cadda815230daad05/tenor.gif?itemid=13649339'); background-repeat: no-repeat;background-size: cover;background-position: center;">
+                <div class="mt-4 ml-5" style="float: left;">
+                    <i class='fas fa-cloud-sun-rain sun animate__animated animate__pulse animate__infinite animate__slow' style='font-size:58px;color:rgb(229, 255, 0)'></i>
+                    <p class="ml-2 mt-2">
+                        <span class="text-light" *ngFor=" let item of weatherData.weather ">
+                               <b> {{item.main}}</b><br>
+                               <small>{{item.description}}</small>
+                            </span>
+                    </p>
+                </div>
+                <div class="mt-5 mr-5 " style="float: right; ">
+                    <i class='fas fa-street-view street' style='text-shadow: 7px 28px 10px rgb(95, 86, 86); font-size:48px;color:rgb(255, 255, 255);float: left; '></i>
+                    <h2 class="text-light city" style="float: left; text-shadow: 7px 8px 10px rgb(95, 86, 86); ">{{weatherData.name}}</h2>&nbsp;
+                    <h1 class="city" style="float: right; text-shadow: 7px 8px 10px rgb(95, 86, 86); color: rgb(229, 255, 0) ">- {{weatherData.sys.country}}</h1>
+
+                </div>
+
+                <h1 class="mt-5 text-light temp" style="font-size: 70px; position: absolute; margin-left: 35%; text-shadow: 7px 8px 10px rgb(95, 86, 86); ">{{weatherData.main.temp-273.15 | number}}&deg;<small><b>c</b></small></h1>
+
+            </div>
+        </div>
+
+        <!-- default case ------------------------------------------------------------ -->
+
+        <div *ngSwitchDefault>
+            <div class=" " style="width: 100%; height: 20vh; background-image: url( 'https://www.fox8live.com/resizer/9ueUhxU19NcQDO5krMFoTOxzN18=/1200x600/arc-anglerfish-arc2-prod-raycom.s3.amazonaws.com/public/525NQWAC3NGO5PGEC3URYV5EK4.jpg'); background-repeat:
+                        no-repeat;background-size: cover;background-position: center; ">
+                <div class="mt-4 ml-5 " style="float: left; ">
+                    <i class='fas fa-cloud sun animate__animated animate__pulse animate__infinite animate__slow' style='font-size:58px;color:rgb(255, 255, 255)'></i>
+                    <p class="ml-2 mt-2 ">
+                        <span *ngFor="let item of weatherData.weather ">
+               <b class="text-light "> {{item.main}}</b><br>
+               <small class="text-light ">{{item.description}}</small>
+            </span>
+                    </p>
+                </div>
+                <div class="mt-5 mr-5 " style="float: right; ">
+                    <i class='fas fa-street-view street' style='text-shadow: 7px 28px 10px rgb(95, 86, 86); font-size:48px;color:rgb(255, 255, 255);float: left; '></i>
+                    <h2 class="text-light city" style="float: left; text-shadow: 7px 8px 10px rgb(95, 86, 86); ">{{weatherData.name}}</h2>&nbsp;
+                    <h1 class="city" style="float: right; text-shadow: 7px 8px 10px rgb(95, 86, 86); color: rgb(229, 255, 0) ">- {{weatherData.sys.country}}</h1>
+
+                </div>
+
+                <h1 class="mt-5 text-light temp" style="font-size: 70px; position: absolute; margin-left: 35%; text-shadow: 7px 8px 10px rgb(95, 86, 86); ">{{weatherData.main.temp-273.15 | number}}&deg;<small><b>c</b></small></h1>
+
+            </div>
+        </div>
+        <!-- end default case-------------------------------------------------------------------- -->
+
+        </div>
+        </span>
+        <!-- all details --------------------------------------------------------- -->
+        <div class="row mt-3 ">
+            <div class="col-sm-12 ">
+                <div class="card " style="background-color: rgb(165, 128, 128); ">
+                    <div class="card-header text-center">
+                        <h3 class="text-light day">{{ dateObj | date:'EEEE' }}&nbsp; <i class='fas fa-smog' style='font-size:48px;color:rgb(255, 255, 255)'></i></h3>
+                    </div>
+                    <div class=" card-body table-responsive ">
+                        <table class="table table-borderless ">
+                            <tr class="text-light ">
+                                <th>visibility</th>
+                                <th>temp_min</th>
+                                <th>temp_max</th>
+                                <th>pressure</th>
+                                <th>humidity</th>
+                                <th>wind-speed</th>
+                                <th>sea_level</th>
+                                <th>grnd_level</th>
+                            </tr>
+                            <tr class="text-light ">
+                                <td>{{weatherData.visibility}} meter</td>
+                                <td>{{weatherData.main.temp_min-273.15 | number}}&deg;c</td>
+                                <td>{{weatherData.main.temp_max-273.15 | number}}&deg;c</td>
+                                <td>{{weatherData.main.pressure}} hPa</td>
+                                <td>{{weatherData.main.humidity}}%</td>
+                                <td>{{weatherData.wind.speed*3.6 | number}} km/h</td>
+                                <td>{{weatherData.main.sea_level}} hPa</td>
+                                <td>{{weatherData.main.grnd_level}} hPa</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End details----------------------------------------------------- -->
+    </ng-template>
+</ng-template>
+</div>
+</div>

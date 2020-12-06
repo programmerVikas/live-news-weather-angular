@@ -1,0 +1,28 @@
+<div class="card mainCard">
+    <div class="card-header text-center">
+        <h1 class="hLine"> Today's Breaking News.....</h1>
+    </div>
+
+
+    <div class="card-body " *ngFor="let data of name.articles">
+        <div class="card mb-3">
+            <!-- <img class="card-img-top" src="{{data.urlToImage}}" alt="Card image cap" height="350px"> -->
+            <a class="" href="{{data.url}}" target="blank"><img class="card-img-top" src="{{data.urlToImage}}" alt="SORRY Image not found....." height="350px"></a>
+            <div class="card-body">
+                <h5 class="card-title">{{data.title}}</h5>
+                <p class="card-text">{{data.description}}</p>
+                <p class="card-text"><small class="text-muted">{{data.content}}</small>&nbsp;
+                    <a class="badge badge-success p-2" href="{{data.url}}" target="blank">Read more........</a>
+                </p>
+            </div>
+            <div class="card-footer">
+                <div class="">
+                    <small style="float: right;">PublishedAt : {{data.publishedAt}}</small>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

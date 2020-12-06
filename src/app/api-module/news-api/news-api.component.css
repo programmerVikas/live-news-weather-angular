@@ -1,0 +1,18 @@
+.hLine {
+    font-family: 'Slackey', cursive;
+    text-shadow: 5px 15px 15px rgb(134, 91, 91);
+    color: red;
+}
+
+.card-title {
+    font-family: 'Rubik', sans-serif;
+}
+
+.card-text {
+    font-family: 'Quicksand', sans-serif;
+}
+
+.mainCard {
+    box-shadow: 5px 5px 15px 5px rgb(177, 139, 139);
+    margin-bottom: 30px;
+}
